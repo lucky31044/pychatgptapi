@@ -1,0 +1,29 @@
+from pyChatGPT import ChatGPT
+from flask import Flask,request
+
+session_token = 'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..UlHubg56d3bvv_2P.nbGx8XAXavY4jiBwr2ECzMppMJDPL6lHP1qocCDfrCW8VyOcxKqnQBeBT_IkJlEPfmAub_daSr16BOpFl4ONZRj9v23dU8HnOAcz_jj5ocIJ4PXi7AZ06bTiifaViD-8pH8mCnGl8bGyg7ysU8cIPMqTMnRjQCLccduYLdRhxVYnMnhjMp_Gx-iD35PlclusRjqm7H5eRZLlrSCQSpx268tSL7-PXakLdH_-d4ZbCnYC_akL9vAEb0-l6L697fEtcAdvtsX4xoiMGQRjhLP17V-yi9TFZX5dI21QOME7xzqeGGsQEi1wHHPn4VGI1tPqBXEdwHPHK_mW4udHgx9QH3sRAwRe3NeARPf-JnFCcN9F14doVKKkzjnAi2H7Ub_15a39rAfhdxCkO2iN0mOjfkBP3UFliT_Lbq4VuL1jLnsprTUz9iWg_786oyaqhVmHVN-bluBVQNGsmeLVQwX-ZBLmgzgayqMWqQH9ndQmcMRF67ZMRAKPPovfpSyeaCe4szWiR66W64lXsSx4LAeOsMoIv7d9eehGWUx6UHfr3DjCjORCZUHEZywQ7wqyyPPjMhvBvf9ByftVY1bHZudoJQJQmPGrr8NpjMufGMUmnAYRxD5-Ft7OYUrpOIvzYJ9bBWrLAg2iH55er_szLHM0cL8OjO8gCENg_StjJn6dBZd-9AbTQxrf4oJsfXWU5XeIw9zH1YXGDe8PbFf-R30MyNrSW_EMd5Cm4XxRELlB7llTg7ilzlgColnVRvVkH_Zzf6uyFDYeROD6bl7Qnx3aBOQQw0JAAw4ea61OXP6HE6LVUG52fcpGO05VFC9R99zTnloxCoFq8o8RSzQAPx6dMEz9AdXpTl_ajQr6PMMXuDbfoBKbdbgIuOg4prUZKjKTW9mUHbkgjl790SBT3cLB6xvEXl3oFrQeWyrwiEqtNOUxGemdBlT4oOGWPczpa05xdh53fyX7fjOuZf1mXzxE6Nx1uLhzSrIdenS15bAJt9B3_36DgRaQ8icrsCswWe0p-s1ktytgGuaSbZ1708HBx1lJGdf5zy90M7XJty7uX5y3khQjLWJHwNFGoJbsE-vKZju3A-Z19N-yda3ugWWL4eLhg18O8aZkuijaQLVo1zuC4dOZXyiyaBQdHrQ3Q_S2PL4YnwFcS-reR_bbqKu8i2HMjj5czbtvLN5f29zAiJHVqAitIXrmZWgC1vmtRwFGJTDLRwero9nTU6izXOQW9WyFKqeNL2cB1TBXnvBW_OHeEhXSNJkLS2A08V5I-0cbTQYrl9IYT1Fe3_CL_zMkSg2CkQYGjdbKNty5c5CQKefiwdyiUeuX8xUy4zk2RSz07p5hmMhTf6IWzBA70GHHczb_tT-GzX3xgt3liJZa8Xm_TlVbfr7qekiXHje5e9LEe1KW4fk1XCyzwDr3LBP1_PGq6_DUxhrMPDuxgkGHXUff8-0PjYKXjibQ0QrghF7XoACuusxbehot52JQXmTE209arm-7P5q6OBpNv71PRQ6rEF2qaAV4BfMg7Je5qdoui5b3msyH-E-V7WfGcV5XPZsOhHyhuT2E-DnkjxuncqKpM-pFnT0qfglsgcGegxyu961n-PWVlWZhJwTITLpcpdTjBHAdH8rA5z34VW8Hydz3bOBVEzFhgbsstYoy6nO87SAG8Ei-Ok6IeIfBXn08GfOuqI7WJUQj4zQlyhyfjBjCU8T-G2ZebI54TAIiw6Pxo8FgptlZn5DyH3cDMgsb16sD7vO2UIoaoECthUDigBDxFD7F-bb48sk5lztFRF4CRqrgglxjqsCa2hzYZDlWp_biTWCaR3RagjY_pWkOt4bV_arR0ufIB5oWgU48v8lwxGTUrB0R9a8MCPwR4MqiQLKa1AA86PK8tsYwL_uBMN4Z6PK-qj8LDaET6fGyfVCn_ZT3o5-vmlxJhMesQRGhRT7EifwJ9WIXWfQXiDTlyvxrLgyAe333291KgEJevz68I-Kylg_vniyyyrTyfKLiNazek5fTAu7Q273S3P4WHICQqz-_8525Romp6WE8Xkjkl5KmUDbOKxLE-rr-a5F8cbvfSMUxh662YKnVIFqpaZhcHrDnDH2uUjhC4zFWh6k_WuDivToSHqPuCp8WpB-gP0VJNto9XHzPV6CHEEU7zNP_u9q-Jh0jgjwgbE5vz9kImPAFFxDqKLEGEpwO7qqFJI-E5D2ekl5x80z0fJx6EUr32-vrTws0IesmNoQyoOgqcwuYf9zUx3KylxdhmwQsevWbmeFfjVCJiINFH4ObozniVqFGD2tWq_TK8sF8XLKUojetXwNLdQchPpp3IOtZvkQio62Pl7r7AGy6uxOhny4MV2Gvb2fLfrH4MJiukbLeA9xlIYHZIqMleyv_iqxAeXSFUys.Ib8Nz4tz8IPz86LBa6-3_A'  # `__Secure-next-auth.session-token` cookie from https://chat.openai.com/chat
+api = ChatGPT(session_token)  # auth with session token
+ 
+# Flask constructor takes the name of
+# current module (__name__) as argument.
+app = Flask(__name__)
+ 
+# The route() function of the Flask class is a decorator,
+# which tells the application which URL should call
+# the associated function.
+@app.route('/', methods=['POST'])
+# ‘/’ URL is bound with hello_world() function.
+def hello_world():
+    request_data = request.get_json()
+    print(request_data['message'])
+    msg = request_data['message']
+    resp = api.send_message(msg)
+    print(resp['message'])
+    return resp['message']
+ 
+# main driver function
+if __name__ == '__main__':
+ 
+    # run() method of Flask class runs the application
+    # on the local development server.
+    app.run(host='0.0.0.0', port=9000, threaded=True)
